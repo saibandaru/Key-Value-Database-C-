@@ -1,0 +1,62 @@
+DBElement<Key,Data>
+	string name
+	string descr
+	DataTime timeStamp
+	List<Key> childern
+	Data payload
+	
+	constructor assign name="unnamed" descr="indescribed"
+			timeStamp=DateTime.Now
+			children=new List<Key>
+
+	LocalExtensions
+		showElemMetaData returns the string contains all the metadata
+		showElementWithTestType1 works for <Key,string> returns a string contains whole of the object
+		showElementWithTestType2 works for <Key,List<string>> returns a string that contains whole object
+	main
+		construct a default object and print
+		construct obj by passing arg to const and set payload
+		construct List<string> data object and set name and desc print
+		construct List<string> data object and set children
+DBEngine<Key,Value>
+	Dictionary<Key,Value> dbStore
+
+	constructor initalise dbStore to Dictionary of Key,Value
+
+	member functions:
+		insert(Key key,Value value)	returns bool which is true when inserted only when key is not already der in dataStore or else false
+		getValue(Key key,out Value value) returns true when the key is found and value paramater is populated and false if its not present in the database
+		Keys() returns IEnumerable<Key>  which is all keys of the dataStore
+	
+	DBEngineExtensions 
+		showWithTestType1<Key> for DBElement<Key,string> prints the database of <Key,string> elements
+		showWithTestType2<Key> for DBElement<Key,List<string>> prints the database of <Key,Lis<string>> elements
+	
+	main
+		generate key
+		integer
+		-------
+		int key = 0;
+		Func<int> keyGen = () => { ++key; return key; };  // anonymous function to generate keys
+		
+		string
+		------
+		int seed = 0;
+		      string skey = seed.ToString();
+		      Func<string> skeyGen = () => {
+		        ++seed;
+		        skey = "string" + seed.ToString();
+		        skey = skey.GetHashCode().ToString();
+		        return skey;
+		      };
+
+DBElementExtensions
+		showMetaData helps to display metadata of DBElement
+		showElement helps to display DBElement
+		showEnumerableElement helps to display Enumerable DBElement
+DBEngineExtensions
+		show helps to display simple dataStore
+		showEnumerable  helps to display Enumerable dataStore
+
+		
+
